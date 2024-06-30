@@ -11,7 +11,7 @@
     "modules-left": [
         "clock",
         "custom/weather",
-        "wlr/workspaces",
+        "hyprland/workspaces",
         "custom/media"
     ],
     "modules-center": ["hyprland/window"],
@@ -29,12 +29,12 @@
         "format": "{}",
         "max-length": 60,
     },
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
         //"format": "{icon}",
-        "persistent_workspaces": {
+        "workspaces": {
             "1": [],
             "2": [],
             "3": [],
@@ -87,7 +87,7 @@
         "spacing": 10
     },
     "clock": {
-        "format": "{: %R   %d/%m}",
+        "format": " {:%R   %d/%m}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "battery": {
