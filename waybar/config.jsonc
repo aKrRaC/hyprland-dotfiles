@@ -48,7 +48,7 @@
         }
     },
     "custom/media": {
-        "format": "{icon} {}",
+        "format": "{0} {1}",
         "return-type": "json",
         "max-length": 26,
 	"on-click": "playerctl play-pause",
