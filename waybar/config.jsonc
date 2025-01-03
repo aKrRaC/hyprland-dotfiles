@@ -1,6 +1,8 @@
-{
+[{
+    // Main monitor: DP-1
     "layer": "top",
     "position": "top",
+    "output": "DP-1",
     "margin-left": 10,
     "margin-right": 10,
     "mod": "dock",
@@ -48,9 +50,9 @@
         }
     },
     "custom/media": {
-        "format": "{0} {1}",
+        "format": "{0}",
         "return-type": "json",
-        "max-length": 26,
+        "max-length": 46,
 	"on-click": "playerctl play-pause",
         "escape": true,
         "exec": "$HOME/.config/waybar/scripts/mediaplayer.py 2> /dev/null"
@@ -60,7 +62,7 @@
         "format": "{ifname}",
         "format-wifi": "{essid} ",
         "format-ethernet": "ETH ",
-        "format-disconnected": "", //An empty format will hide the module.
+        "format-disconnected": "ETH ", //An empty format will hide the module.
         "tooltip-format": "{ifname} via {gwaddr} ",
         "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
         "tooltip-format-ethernet": "{ifname} ",
@@ -131,4 +133,57 @@
         "on-click": "dunstctl set-paused toggle",
         "restart-interval": 1
     }
-}
+},
+{
+    // Vertical monitor: HDMI-A-1
+    "layer": "top",
+    "position": "top",
+    "output": "HDMI-A-1",
+    "margin-left": 10,
+    "margin-right": 10,
+    "mod": "dock",
+    "exclusive": true,
+    "passthrough": false,
+    "gtk-layer-shell": true,
+    "height": 0,
+    "modules-left": [
+        "clock",
+        "hyprland/workspaces",
+    ],
+    "modules-center": ["hyprland/window"],
+    "modules-right": [
+	"custom/dunst"
+    ],
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 60,
+    },
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "on-click": "activate",
+        //"format": "{icon}",
+        "workspaces": {
+            "1": [],
+            "2": [],
+            "3": [],
+            "4": [],
+            "5": [],
+            "6": [],
+            "7": [],
+            "8": [],
+            "9": [],
+            "10": []
+        }
+    },
+    "clock": {
+        "format": " {:%R   %d/%m}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
+    },
+    "custom/dunst": {
+        "exec": "~/.config/waybar/scripts/dunst.sh",
+        "on-click": "dunstctl set-paused toggle",
+        "restart-interval": 1
+    }
+}]
+
