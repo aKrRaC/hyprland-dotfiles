@@ -35,7 +35,6 @@
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
-        //"format": "{icon}",
         "workspaces": {
             "1": [],
             "2": [],
