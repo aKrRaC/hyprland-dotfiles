@@ -29,7 +29,7 @@
 
     "hyprland/window": {
         "format": "{}",
-        "max-length": 60,
+        "max-length": 60
     },
     "hyprland/workspaces": {
         "disable-scroll": true,
@@ -60,11 +60,11 @@
         "interface": "enp42s0",
         "format": "{ifname}",
         "format-wifi": "{essid} ",
-        "format-ethernet": "ETH ",
-        "format-disconnected": "ETH ", //An empty format will hide the module.
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "tooltip-format-wifi": "{essid} ({signalStrength}%) ",
-        "tooltip-format-ethernet": "{ifname} ",
+        "format-ethernet": "ETH ",
+        "format-disconnected": "ETH ", //An empty format will hide the module.
+        "tooltip-format": "{ifname} via {ipaddr} ",
+        "tooltip-format-wifi": "{essid} ({signalStrength}%) IP: {ipaddr} ",
+        "tooltip-format-ethernet": "ETH {ifname} IP: {ipaddr} ",
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
