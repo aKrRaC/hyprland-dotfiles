@@ -31,6 +31,7 @@ window {
     y-offset: -50px;
     height: 70%;
     width: 350px;
+    border-radius: 9px;
     orientation: vertical;
 }
 

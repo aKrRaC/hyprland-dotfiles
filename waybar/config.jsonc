@@ -20,7 +20,6 @@
     "modules-right": [
         "tray",
         "network",
-        "custom/updates",
         "battery",
         "pulseaudio",
         "pulseaudio#microphone",
@@ -68,14 +67,6 @@
         "tooltip-format-disconnected": "Disconnected",
         "max-length": 50
     },
-    "custom/updates": {
-        "format": "  {}",
-        "interval": 7200,                     // every two hours
-        "exec": "i=$(checkupdates); echo \"$i\" |wc -l; echo \"$i\" |column -t |tr '\n' '\r'",
-        "exec-if": "exit 0",                  // always run; consider advanced run conditions
-        "on-click": "kitty -e sudo pacman -Syu", // update system
-        "signal": 8
-    },
    "custom/weather" : {
         "tooltip" : true,
         "format" : "{}",
@@ -104,7 +95,7 @@
         "format-icons": ["", "", "", "", "", "", "", "", "", "", ""]
     },
     "pulseaudio": {
-        "format": "{icon} {volume}%",
+        "format": "{icon}  {volume}%",
         "tooltip": false,
         "format-muted": " Muted",
         "on-click": "pamixer -t",
@@ -124,7 +115,7 @@
     "pulseaudio#microphone": {
         "format": "{format_source}",
         "format-source": "",
-        "format-source-muted": " Muted",
+        "format-source-muted": "  Muted",
         "on-click": "pamixer --default-source -t"
     },
     "custom/dunst": {
@@ -146,22 +137,19 @@
     "gtk-layer-shell": true,
     "height": 0,
     "modules-left": [
-        "clock",
-        "hyprland/workspaces",
+        "hyprland/workspaces"
     ],
     "modules-center": ["hyprland/window"],
     "modules-right": [
-	"custom/dunst"
     ],
     "hyprland/window": {
         "format": "{}",
-        "max-length": 60,
+        "max-length": 60
     },
     "hyprland/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
         "on-click": "activate",
-        //"format": "{icon}",
         "workspaces": {
             "1": [],
             "2": [],
@@ -174,15 +162,6 @@
             "9": [],
             "10": []
         }
-    },
-    "clock": {
-        "format": " {:%R   %d/%m}",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
-    },
-    "custom/dunst": {
-        "exec": "~/.config/waybar/scripts/dunst.sh",
-        "on-click": "dunstctl set-paused toggle",
-        "restart-interval": 1
     }
 }]
 

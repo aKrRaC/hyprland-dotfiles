@@ -1,1 +1,2 @@
-smb://192.168.0.3/networkshare/ Network Share
+smb://192.168.0.9/mediashare/ MediaShare
+smb://192.168.0.9/datashare/ DataShare
