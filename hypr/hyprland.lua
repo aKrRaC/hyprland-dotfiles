@@ -1,3 +1,18 @@
+-- █▀▀ █▄░█ █░█ █ █▀█ █▀█ █▄░█ █▀▄▀█ █▀▀ █▄░█ ▀█▀  █░█ ▄▀█ █▀█ █ ▄▀█ █▄▄ █░░ █▀▀ █▀
+-- ██▄ █░▀█ ▀▄▀ █ █▀▄ █▄█ █░▀█ █░▀░█ ██▄ █░▀█ ░█░  ▀▄▀ █▀█░█▀▄ █ █▀█░█▄█ █▄▄ ██▄ ▄█
+-- XCursor Fallback
+hl.env("XCURSOR_THEME", "Layan-white-cursors")
+hl.env("XCURSOR_SIZE", "24")
+
+-- QT specific environment variables
+hl.env("QT_QPA_PLATFORM", "wayland;xcb")
+hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
+hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
+hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
+
+-- Fix screen sharing issues
+hl.env("bitdepth", "10")
+
 -- █▀▀ ▀▄▀ █▀▀ █▀▀
 -- ██▄ █░█ ██▄ █▄▄
 hl.on("hyprland.start", function()
@@ -6,7 +21,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP QT_QPA_PLATFORMTHEME")
     hl.exec_cmd("/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1")
     hl.exec_cmd("hyprctl setcursor Layan-white-cursors 24")
-    hl.exec_cmd("swaybg -m fill -i ~/.config/wallpaper/background.png")
+    hl.exec_cmd("waypaper --restore")
     hl.exec_cmd("waybar")
     hl.exec_cmd("hypridle")
 
@@ -18,18 +33,15 @@ hl.on("hyprland.start", function()
     -- GTK Theme
     hl.exec_cmd("gsettings set org.gnome.desktop.interface gtk-theme \"TokyoNight\"")
     hl.exec_cmd("gsettings set org.gnome.desktop.interface color-scheme \"prefer-dark\"")
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-theme \"Layan-white-cursors\"")
+    hl.exec_cmd("gsettings set org.gnome.desktop.interface cursor-size 24")
+
+    -- Flatpak Theme
+    hl.exec_cmd("flatpak override --filesystem=~/.themes:ro --filesystem=~/.icons:ro --user")
+
+    -- KDE connect
+    hl.exec_cmd("/usr/bin/kdeconnectd &")
 end)
-
--- █▀▀ █▄░█ █░█ █ █▀█ █▀█ █▄░█ █▀▄▀█ █▀▀ █▄░█ ▀█▀  █░█ ▄▀█ █▀█ █ ▄▀█ █▄▄ █░░ █▀▀ █▀
--- ██▄ █░▀█ ▀▄▀ █ █▀▄ █▄█ █░▀█ █░▀░█ ██▄ █░▀█ ░█░  ▀▄▀ █▀█░█▀▄ █ █▀█░█▄█ █▄▄ ██▄ ▄█
--- QT specific environment variables
-hl.env("QT_QPA_PLATFORM", "wayland;xcb")
-hl.env("QT_QPA_PLATFORMTHEME", "qt6ct")
-hl.env("QT_AUTO_SCREEN_SCALE_FACTOR", "1")
-hl.env("QT_WAYLAND_DISABLE_WINDOWDECORATION", "1")
-
--- Fix screen sharing issues
-hl.env("bitdepth", "10")
 
 -- █▀▄▀█ █▀█ █▄░█ █ ▀█▀ █▀█ █▀█
 -- █░▀░█ █▄█ █░▀█ █ ░█░ █▄█ █▀▄
@@ -173,6 +185,7 @@ hl.window_rule({match = { class = "^viewnior$" }, float = true, size = "1590 930
 hl.window_rule({match = { class = "^blueman-manager$" }, float = true, size = "1080 680"})
 hl.window_rule({match = { class = "^Cider$" }, float = true, size = "1590 930"})
 hl.window_rule({match = { class = "^org.kde.kdeconnect.app$" }, float = true, size = "900 740"})
+hl.window_rule({match = { class = "^waypaper$" }, float = true, center = true, size = "820 565"})
 hl.window_rule({match = { class = "^wlogout$" }, fullscreen = true})
 hl.window_rule({match = { class = "^mpv$" }, idle_inhibit = "focus"})
 hl.window_rule({match = { fullscreen = true }, idle_inhibit = "fullscreen"})
@@ -204,7 +217,7 @@ hl.window_rule({
 -- █░█ ██▄ ░█░ █▄█ █ █░▀█ █▄▀
 hl.bind("SUPER + X", hl.dsp.exec_cmd("kitty"))
 hl.bind("SUPER + E", hl.dsp.exec_cmd("nemo"))
-hl.bind("SUPER + B", hl.dsp.exec_cmd("brave-origin"))
+hl.bind("SUPER + B", hl.dsp.exec_cmd("zen-browser"))
 hl.bind("SUPER + C", hl.dsp.exec_cmd("zeditor"))
 hl.bind("SUPER + Z", hl.dsp.exec_cmd("cider"))
 
@@ -236,9 +249,9 @@ hl.bind("SUPER + Print", hl.dsp.exec_cmd("hyprshot -z -o " .. outputfolder .. " 
 hl.bind("SUPER + R", hl.dsp.exec_cmd("killall rofi || rofi -show drun -theme ~/.config/rofi/sidebar/sidebar.rasi"))
 hl.bind("SUPER + V", hl.dsp.exec_cmd("cliphist list | rofi -dmenu -theme ~/.config/rofi/clipboard/clipboard.rasi -display-columns 2 | cliphist decode | wl-copy"))
 hl.bind("SUPER + ALT + V", hl.dsp.exec_cmd("cliphist wipe"))
+hl.bind("SUPER + CTRL + W", hl.dsp.exec_cmd("waypaper"))
 hl.bind("SUPER + L", hl.dsp.exec_cmd("hyprlock"))
 hl.bind("SUPER + escape", hl.dsp.exec_cmd("wlogout --protocol layer-shell -P DP-1 -b 5 -T 550 -B 550"))
-hl.bind("SUPER + F1", hl.dsp.exec_cmd("~/.config/hypr/keybind"))
 
 -- █░█░█ █ █▄░█ █▀▄ █▀█ █░█░█   █▀▄▀█ ▄▀█ █▄░█ ▄▀█ █▀▀ █▀▄▀█ █▀▀ █▄░█ ▀█▀
 -- ▀▄▀▄▀ █ █░▀█ █▄▀ █▄█ ▀▄▀▄▀   █░▀░█ █▀█ █░▀█ █▀█ █▄█ █░▀░█ ██▄ █░▀█ ░█░
